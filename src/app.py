@@ -19,7 +19,7 @@ def hello_world():
 def about_world():
     return 'this is the about'
 
-@app.route('/useit')
+@app.route('/use_it')
 # ‘/’ URL is bound with hello_world() function.
 def useit():
     return 'this is some usefull function'
