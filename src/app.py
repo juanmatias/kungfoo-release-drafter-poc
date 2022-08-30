@@ -14,6 +14,11 @@ app = Flask(__name__)
 def hello_world():
     return 'release drafter sample app'
 
+@app.route('/about')
+# ‘/’ URL is bound with hello_world() function.
+def about_world():
+    return 'this is the about'
+
 # main driver function
 if __name__ == '__main__':
 
