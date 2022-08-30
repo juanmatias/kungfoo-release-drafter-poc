@@ -19,6 +19,12 @@ def hello_world():
 def about_world():
     return 'this is the about'
 
+@app.route('/useit')
+# ‘/’ URL is bound with hello_world() function.
+def useit():
+    return 'this is some usefull function'
+
+
 # main driver function
 if __name__ == '__main__':
 
