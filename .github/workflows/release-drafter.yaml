@@ -1,10 +1,10 @@
 name: Release Drafter
 
 on:
-  push:
+  #push:
     # branches to consider in the event; optional, defaults to all
-    branches:
-      - master
+    #branches:
+    #  - master
   # pull_request event is required only for autolabeler
   pull_request:
     # Only following types are handled by the action, but one can default to all as well
@@ -17,27 +17,8 @@ permissions:
   contents: read
 
 jobs:
-  get_last_commit:
-    runs-on: ubuntu-latest
-    steps:
-      - name: GetLastCommit
-        run: |
-          lastcommit='master'
-          if [ "${{ github.event.pull_request.number }}" != "" ];
-          then
-            lastcommit=$(curl -X GET \
-            -H 'Accept: application/vnd.github.v3+json' \
-            -H 'Authorization: token ${{ secrets.GITHUB_TOKEN }}' \
-            -H 'content-type: application/json; charset=utf-8'  "https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/commits" \
-            | jq '. | .[-1] | .sha')
-          fi
-          echo "Using $lastcommit "
-          echo "::set-output name=lastcommit::$lastcommit"
-          
-    outputs:
-      lastcommit: ${{ steps.GetLastCommit.outputs.lastcommit }}
+
   update_release_draft:
-    needs: get_last_commit
     permissions:
       # write permission is required to create a github release
       contents: write
