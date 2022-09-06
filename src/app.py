@@ -23,7 +23,7 @@ def hello_world():
 @app.route('/_about')
 # ‘/’ URL is bound with hello_world() function.
 def about_world():
-    return 'this is the about'
+    return 'this is the real about'
 
 @app.route('/use_it')
 # ‘/’ URL is bound with hello_world() function.
