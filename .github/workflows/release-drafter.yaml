@@ -61,4 +61,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          commitish: ${{needs.get_last_commit.outputs.lastcommit}}
+          commitish: ${{ github.head_ref }}
