@@ -20,6 +20,12 @@ def hello_world():
 def hello_world():
     return 'release drafter sample app'
 
+
+@app.route('/another_about')
+# ‘/’ URL is bound with hello_world() function.
+def another_about_world():
+    return 'this is the other about'
+
 @app.route('/_about')
 # ‘/’ URL is bound with hello_world() function.
 def about_world():
