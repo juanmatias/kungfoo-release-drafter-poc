@@ -28,7 +28,6 @@ jobs:
           -H 'content-type: application/json; charset=utf-8'  "https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/commits")
           ((([ "$lastcommit" != "" ] && lastcommit=$(echo $lastcommit | jq '. | .[-1] | .sha')) || lastcommit='master')
           echo "Using $lastcommit "
-          echo "::set-output name=lastcommit::$lastcommit"
           
     outputs:
       lastcommit: ${{ steps.GetLastCommit.outputs.lastcommit }}
