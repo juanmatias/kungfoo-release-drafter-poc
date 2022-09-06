@@ -17,7 +17,17 @@ permissions:
   contents: read
 
 jobs:
+  get_last_commit:
+    steps:
+      - name: GetLastCommit
+        run: |
+        lastcommit = $(curl -X GET -H 'Authorization: token ${{ secrets.GITHUB_TOKEN }} -H "Accept: application/vnd.github.v3+json" -H "content-type: application/json; charset=utf-8" "https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/commits" | jq '. | .[-1] | .sha') && \
+        echo "::set-output lastcommit=$lastcommit" && \
+        echo "Using $lastcommit
+    outputs:
+      output1: ${{ steps.GetLastCommit.outputs.lastcommit }}
   update_release_draft:
+    needs: get_last_commit
     permissions:
       # write permission is required to create a github release
       contents: write
@@ -41,4 +51,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          commitish: master
+          commitish: ${{needs.get_last_commit.outputs.lastcommit}}
