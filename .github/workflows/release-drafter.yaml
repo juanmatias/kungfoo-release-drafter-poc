@@ -21,7 +21,7 @@ jobs:
     steps:
       - name: GetLastCommit
         run: |
-        lastcommit = $(curl -X GET -H 'Authorization: token ${{ secrets.GITHUB_TOKEN }} -H "Accept: application/vnd.github.v3+json" -H "content-type: application/json; charset=utf-8" "https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/commits" | jq '. | .[-1] | .sha') && \
+        lastcommit = $(curl -X GET -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github.v3+json" -H "content-type: application/json; charset=utf-8" "https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/commits" | jq '. | .[-1] | .sha') && \
         echo "::set-output lastcommit=$lastcommit" && \
         echo "Using $lastcommit
     outputs:
